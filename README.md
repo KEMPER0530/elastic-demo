@@ -1,36 +1,33 @@
-# elasticsearch
+# Elasticsearch
 
-elasticsearch on docker.
+Elasticsearch on docker.
 
-## elasticsearch
-
-http://localhost:9200
-
-## kibana
+## kibanaの接続先
 
 http://localhost:5601
 
 ## テストデータの解凍
 
 ```bash
-$ tar -zxvf ldgourmet.tar.gz
+$ tar -zxvf ./data/ldgourmet.tar.gz
 ```
 
 ## テストデータを csv から json へ変更
 
 ```bash
-$ python csv2json.py restaurants.csv > restaurants.json
-$ python csv2json.py areas.csv > areas.json
-$ python csv2json.py categories.csv > categories.json
-$ python csv2json.py prefs.csv > prefs.json
-$ python csv2json.py rating_votes.csv > rating_votes.json
-$ python csv2json.py ratings.csv > ratings.json
-$ python csv2json.py stations.csv > stations.json
+$ python ./data/csv2json.py restaurants.csv > restaurants.json
+$ python ./data/csv2json.py areas.csv > areas.json
+$ python ./data/csv2json.py categories.csv > categories.json
+$ python ./data/csv2json.py prefs.csv > prefs.json
+$ python ./data/csv2json.py rating_votes.csv > rating_votes.json
+$ python ./data/csv2json.py ratings.csv > ratings.json
+$ python ./data/csv2json.py stations.csv > stations.json
 ```
 
 ## スキーマ定義
 
 ```bash
+$ cd data
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restaurants/_doc' -d @schema.json
 ```
 
@@ -46,20 +43,11 @@ $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/ratings
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/stations/_doc/_bulk?pretty' --data-binary "@stations.json"
 ```
 
----
-
-## Elasticsearch の curl を使った index の削除
-
-https://qiita.com/fujieee/items/5f3795d8213373b3b450
-
----
-
-### SQL と Elasticsearch とのクエリの比較
-
-https://qiita.com/NAO_MK2/items/630f2c4caa0e8a42407c
-https://qiita.com/kieaiaarh/items/5ea4e8a188bd9814000d
-
----
+## Elasticsearchの資料
+ - [公式](https://www.elastic.co/guide/jp/index.html)
+ - [Elasticsearch の curl を使った index の削除](https://qiita.com/fujieee/items/5f3795d8213373b3b450)
+ - [SQL と Elasticsearch とのクエリの比較](https://qiita.com/NAO_MK2/items/630f2c4caa0e8a42407c)
+ - [ElasticsearchとSQL対比しながら理解](https://qiita.com/kieaiaarh/items/5ea4e8a188bd9814000d)
 
 ## API
 
