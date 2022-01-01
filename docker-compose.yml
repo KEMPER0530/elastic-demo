@@ -1,0 +1,51 @@
+version: '3'
+services:
+  es:
+    build: ./elasticsearch
+    container_name: es_docker
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - node.master=true
+      - node.data=true
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
+      - "TZ=Asia/Tokyo"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+  kibana:
+    build: ./kibana
+    container_name: kibana_docker
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://es:9200
+    depends_on:
+      - es
+  logstash:
+    build: ./logstash
+    container_name: logstash_docker
+    volumes:
+      - "./pipeline/:/usr/share/logstash/pipeline/"
+    environment:
+      - "TZ=Asia/Tokyo"
+    ports:
+      - 5000:5000
+    depends_on:
+      - es
+    restart: always
+
+volumes:
+  esdata:
+    driver: local

@@ -1,0 +1,10 @@
+.DS_Store
+
+.env
+*.json
+get-pip.py
+ldbulk.py
+load_csv.py
+jsonWrite.py
+test.py
+*.csv
