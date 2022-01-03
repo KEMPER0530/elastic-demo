@@ -9,7 +9,7 @@ http://localhost:5601
 ## テストデータの解凍
 
 ```bash
-$ tar -zxvf ./data/ldgourmet.tar.gz
+$ cd data && tar -zxvf ./data/ldgourmet.tar.gz
 ```
 
 ## テストデータを csv から json へ変更
@@ -27,7 +27,6 @@ $ python ./data/csv2json.py stations.csv > stations.json
 ## スキーマ定義
 
 ```bash
-$ cd data
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restaurants/_doc' -d @schema.json
 ```
 
@@ -35,11 +34,23 @@ $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restaur
 
 ```bash
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restaurants/_doc/_bulk?pretty' --data-binary "@restaurants.json"
+```
+```bash
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/areas/_doc/_bulk?pretty' --data-binary "@areas.json"
+```
+```bash
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/categories/_doc/_bulk?pretty' --data-binary "@categories.json"
+```
+```bash
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/prefs/_doc/_bulk?pretty' --data-binary "@prefs.json"
+```
+```bash
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/rating_votes/_doc/_bulk?pretty' --data-binary "@rating_votes.json"
+```
+```bash
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/ratings/_doc/_bulk?pretty' --data-binary "@ratings.json"
+```
+```bash
 $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/stations/_doc/_bulk?pretty' --data-binary "@stations.json"
 ```
 
