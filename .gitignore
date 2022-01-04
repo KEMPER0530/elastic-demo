@@ -1,7 +1,14 @@
 .DS_Store
-
 .env
-*.json
+areas.json
+categories.json
+import_data.json
+prefs.json
+rating_votes.json
+ratings.json
+restaurants.json
+stations.json
+mapping.json
 get-pip.py
 ldbulk.py
 load_csv.py
