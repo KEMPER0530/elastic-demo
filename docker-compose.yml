@@ -24,6 +24,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
+    # networks:
+    #   - elastic_default
   kibana:
     build: ./kibana
     container_name: kibana_docker
@@ -33,6 +35,8 @@ services:
       ELASTICSEARCH_HOSTS: http://es:9200
     depends_on:
       - es
+    # networks:
+    #   - elastic_default
   logstash:
     build: ./logstash
     container_name: logstash_docker
@@ -44,8 +48,14 @@ services:
       - 5000:5000
     depends_on:
       - es
+    # networks:
+    #   - elastic_default
     restart: always
 
 volumes:
   esdata:
     driver: local
+
+# networks:
+#     elastic_default:
+#       external: true

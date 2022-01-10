@@ -46,178 +46,214 @@
         }
     },
     "mappings": {
-        "restaurant": {
-            "_source": {
-                "enabled": true
-            },
-            "_all": {
-                "enabled": true,
-                "analyzer": "kuromoji_analyzer"
-            },
+        "restdatademo": {
+            "dynamic": "strict",
             "properties": {
+                "store_id": {
+                    "type": "integer",
+                    "dynamic": false
+                },
                 "id": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "name": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "dynamic": true
                 },
                 "property": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "alphabet": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "name_kana": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "pref_id": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "area_id": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_id1": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_time1": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_distance1": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_id2": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_time2": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_distance2": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_id3": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_time3": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "station_distance3": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "category_id1": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "category_id2": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "category_id3": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "category_id4": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "category_id5": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "zip": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "address": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "kuromoji_analyzer"
+                    "type": "text",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
                 },
                 "north_latitude": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "east_longitude": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "description": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "kuromoji_analyzer"
+                    "type": "text",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
                 },
                 "purpose": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "open_morning": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "open_lunch": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "open_late": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "photo_count": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "special_count": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "menu_count": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "fan_count": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "access_count": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
                 },
                 "created_on": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "modified_on": {
-                    "type": "string",
-                    "index": "analyzed",
-                    "analyzer": "ngram_analyzer"
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
                 },
                 "closed": {
                     "type": "integer",
-                    "index": "not_analyzed"
+                    "dynamic": false
+                },
+                "area_name": {
+                    "type": "text",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
+                },
+                "pref_name": {
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "dynamic": true
+                },
+                "pref": {
+                    "type": "text",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
+                },
+                "location": {
+                    "type": "array",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
+                },
+                "stas": {
+                    "type": "array",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
+                },
+                "cates": {
+                    "type": "array",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
+                },
+                "restaurant_id": {
+                    "type": "integer",
+                    "dynamic": false
+                },
+                "kuchikomi": {
+                    "type": "array",
+                    "analyzer": "kuromoji_analyzer",
+                    "dynamic": true
                 }
             }
         }

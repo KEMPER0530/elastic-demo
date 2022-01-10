@@ -2,263 +2,227 @@
 
 Elasticsearch on docker.
 
-## kibanaの接続先
+# Features
 
-http://localhost:5601
+Elasticsearch のクエリ練習用の機能です。
+[ライブドアグルメデータ](http://blog.livedoor.jp/techblog/archives/65836960.html)を編集し、Elasticsearch へ登録してクエリの検証を実施します。
 
-## テストデータの解凍
+# Requirement
+
+- elasticsearch:7.16.2
+  - analysis-kuromoji
+- kibana:7.16.2
+- logstash:7.16.2
+- Python:3
+
+# Installation
+
+### テストデータの解凍
 
 ディレクトリ移動
+
 ```bash
 $ cd data
 ```
+
 データの解凍
+
 ```bash
 $ tar -zxvf ldgourmet.tar.gz
 ```
 
-## テストデータを csv から json へ変更
+### elasticsearch の起動
 
 ```bash
-$ python csv2json.py restaurants.csv > restaurants.json
-```
-```bash
-$ python csv2json.py areas.csv > areas.json
-```
-```bash
-$ python csv2json.py categories.csv > categories.json
-```
-```bash
-$ python csv2json.py prefs.csv > prefs.json
-```
-```bash
-$ python csv2json.py rating_votes.csv > rating_votes.json
-```
-```bash
-$ python csv2json.py ratings.csv > ratings.json
-```
-```bash
-$ python csv2json.py stations.csv > stations.json
-```
-
-## スキーマ定義
-
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restaurants/_doc' -d @schema.json
-```
-
-## データ投入
-
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restaurants/_doc/_bulk?pretty' --data-binary "@restaurants.json"
-```
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/areas/_doc/_bulk?pretty' --data-binary "@areas.json"
-```
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/categories/_doc/_bulk?pretty' --data-binary "@categories.json"
-```
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/prefs/_doc/_bulk?pretty' --data-binary "@prefs.json"
-```
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/rating_votes/_doc/_bulk?pretty' --data-binary "@rating_votes.json"
-```
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/ratings/_doc/_bulk?pretty' --data-binary "@ratings.json"
-```
-```bash
-$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/stations/_doc/_bulk?pretty' --data-binary "@stations.json"
-```
-
-## Elasticsearchの資料
- - [公式](https://www.elastic.co/guide/jp/index.html)
- - [Elasticsearch の curl を使った index の削除](https://qiita.com/fujieee/items/5f3795d8213373b3b450)
- - [SQL と Elasticsearch とのクエリの比較](https://qiita.com/NAO_MK2/items/630f2c4caa0e8a42407c)
- - [ElasticsearchとSQL対比しながら理解](https://qiita.com/kieaiaarh/items/5ea4e8a188bd9814000d)
-
-## API
-
-## GET /\_cat/health?v
-
-Elasticsearch のヘルスチェックを行う
-
-```bash
-curl "localhost:9200/_cat/health?v"
-```
-
-## GET /\_cat/nodes?v
-
-Node の状態確認
-
-```bash
-curl "localhost:9200/_cat/nodes?v"
-```
-
-## GET /\_cat/indices?v
-
-index のリストアップ
-
-```bash
-curl "localhost:9200/_cat/indices?v"
-```
-
-## PUT /restaurants?pretty
-
-index の作成
-
-```bash
-curl -X PUT "localhost:9200/restaurants?pretty"
-```
-
-## PUT /restaurants/\_doc/1?pretty
-
-index にデータ突っ込む。index 作成前に実行も可能。リプレイスも可能。
-
-```bash
-curl -X PUT -H 'Content-Type:application/json' "localhost:9200/restaurants/_doc/1?pretty" -d '{"name": "John Doe"}'
-```
-
-## GET /restaurants/\_doc/1?pretty
-
-id 指定でデータ所得
-
-```bash
-curl "localhost:9200/restaurants/_doc/1?pretty"
-```
-
-## DELETE /restaurants?pretty
-
-index 削除
-
-```bash
- curl -X DELETE "localhost:9200/restaurants?pretty"
-```
-
-## POST /restaurants/\_doc?pretty
-
-id ランダム生成でデータ突っ込む
-
-```bash
-curl -X POST -H 'Content-Type:application/json' "localhost:9200/restaurants/_doc/?pretty" -d '{"name": "ddddd"}'
-```
-
-## POST /restaurants/\_doc/1/\_update?pretty
-
-document のアップデート
-
-```bash
-curl -X POST -H 'Content-Type:application/json' "localhost:9200/restaurants/_doc/1/_update?pretty" -d '{"doc": {"name": "Jane Doe"}}'
+$ cd /elastic-demo
 ```
 
 ```bash
-curl -X POST -H 'Content-Type:application/json' "localhost:9200/restaurants/_doc/1/_update?pretty" -d '{"doc": {"name": "Jane Doe", "age": 20}}'
+$ docker-compose up -d
 ```
 
-現在のソースドキュメントを参照してスクリプトを実行する
-
 ```bash
-curl -X POST -H 'Content-Type:application/json' "localhost:9200/restaurants/_doc/1/_update?pretty" -d '{"script" : "ctx._source.age += 5"}'
+$ docker-compose ps
+
+     Name                    Command               State                     Ports
+-----------------------------------------------------------------------------------------------------
+es_docker         /bin/tini -- /usr/local/bi ...   Up      0.0.0.0:9200->9200/tcp, 9300/tcp
+kibana_docker     /bin/tini -- /usr/local/bi ...   Up      0.0.0.0:5601->5601/tcp
+logstash_docker   /usr/local/bin/docker-entr ...   Up      0.0.0.0:5000->5000/tcp, 5044/tcp, 9600/tcp
 ```
 
-## DELETE /restaurants/\_doc/2?pretty
-
-document の削除
+### マッピング定義の作成
 
 ```bash
-curl -X DELETE "localhost:9200/restaurants/_doc/2?pretty"
+$ cd data
 ```
 
-## POST /restaurants/\_doc/\_bulk?pretty
+```bash
+$ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restdatademo/_doc?pretty' -d @schema.json
+```
 
-bulk を使用して複数 ドキュメントを index
-データの最後の行は、改行文字\ n で終わる必要がある
+### データ投入
 
 ```bash
-curl -X POST "localhost:9200/restaurants/_doc/_bulk?pretty" -H 'Content-Type: application/json' -d'
+$ python restbulk.py
+```
+
+# Usage
+
+### Elasticsearch のヘルスチェックを行う
+
+#### GET /\_cat/health?v
+
+```bash
+$ curl "localhost:9200/_cat/health?v"
+```
+
+### Node の状態確認
+
+#### GET /\_cat/nodes?v
+
+```bash
+$ curl "localhost:9200/_cat/nodes?v"
+```
+
+### index のリストアップ
+
+#### GET /\_cat/indices?v
+
+```bash
+$ curl "localhost:9200/_cat/indices?v"
+```
+
+### index の作成
+
+#### PUT /restdatademo?pretty
+
+```bash
+$ curl -X PUT "localhost:9200/restdatatest2?pretty"
+```
+
+### index にデータ登録(index 作成前に実行も可能。リプレイスも可能)
+
+#### PUT /restdatademo/\_doc/1?pretty
+
+```bash
+$ curl -X PUT -H 'Content-Type:application/json' "localhost:9200/restdatademo/_doc/1?pretty" -d '{"name": "TEST STORE"}'
+```
+
+### id 指定でデータ所得
+
+#### GET /restdatademo/\_doc/1?pretty
+
+```bash
+$ curl "localhost:9200/restdatademo/_doc/Pob1PX4BSuCe35FEr26s?pretty"
+```
+
+### id ランダム生成でデータ突っ込む
+
+#### POST /restdatademo/\_doc?pretty
+
+```bash
+$ curl -X POST -H 'Content-Type:application/json' "localhost:9200/restdatademo/_doc/?pretty" -d '{"name": "TEST STORE"}'
+```
+
+### document のアップデート
+
+#### POST /restaurants/\_update/1?pretty
+
+```bash
+$ curl -X POST -H 'Content-Type:application/json' "localhost:9200/restdatademo/_update/Pob1PX4BSuCe35FEr26s?pretty" -d '{"doc": {"name": "鮨与志テスト"}}'
+```
+
+### bulk を使用して複数 ドキュメントを index,データの最後の行は、改行文字\ n で終わる必要がある
+
+#### POST /restdatatest2/\_doc/\_bulk?pretty
+
+```bash
+$ curl -X POST "localhost:9200/restdatatest2/_doc/_bulk?pretty" -H 'Content-Type: application/json' -d'
 {"index":{"_id":"1"}}
-{"name": "John Doe" }
+{"name": "TEST STORE1" }
 {"index":{"_id":"2"}}
-{"name": "Jane Doe" }
+{"name": "TEST STORE2" }
 '
-
 ```
 
 ```bash
-curl -X POST "localhost:9200/restaurants/_doc/_bulk?pretty" -H 'Content-Type: application/json' -d'
+$ curl -X POST "localhost:9200/restaurants/_doc/_bulk?pretty" -H 'Content-Type: application/json' -d'
 {"update":{"_id":"1"}}
-{"doc": { "name": "John Doe becomes Jane Doe" } }
+{"doc": { "name": "TEST STORE3" } }
 {"delete":{"_id":"2"}}
 '
-
 ```
 
-## GET /restaurants/\_search?q=\*&sort=account_number:asc&pretty
+### index 削除
 
-URL による検索 API(default10 件)
+#### DELETE /restdatatest2?pretty
 
 ```bash
-curl "localhost:9200/restaurants/_search?q=*&sort=id:asc&pretty"
+$ curl -X DELETE "localhost:9200/restdatatest2?pretty"
 ```
 
-json による検索 API(default10 件)
+### doc 削除
+
+#### DELETE /restdatademo/\_doc/?pretty
 
 ```bash
-curl -X GET "localhost:9200/restaurants/_search" -H 'Content-Type: application/json' -d'
+$ curl -X DELETE "localhost:9200/restdatademo/_doc/FYoEP34BSuCe35FERRr_?pretty"
+```
+
+### json による検索 API(default10 件)
+
+```bash
+$ curl -X GET "localhost:9200/restdatademo/_search?pretty" -H 'Content-Type: application/json' -d'
 {
   "query": { "match_all": {} },
   "sort": [
-    { "id": "asc" }
+    {
+      "store_id": { "order": "asc" }
+    }
   ]
 }
 '
-
 ```
 
-検索数とどこから検索かを指定
+### 検索数とどこから検索かを指定
 
 ```bash
-curl -X GET "localhost:9200/restaurants/_search" -H 'Content-Type: application/json' -d'
+curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
 {
   "query": { "match_all": {} },
   "from": 10,
   "size": 10,
   "sort": [
-    { "id": "asc" }
+    { "store_id": "asc" }
   ]
 }
 '
 
 ```
 
-返却する JSON のフィールドを選択
+### 返却する JSON のフィールドを選択
 
 ```bash
-curl -X GET "localhost:9200/restaurants/_search" -H 'Content-Type: application/json' -d'
+curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
 {
   "query": { "match_all": {} },
-  "_source": ["id", "name"]
+  "_source": ["store_id", "name"]
 }
 '
-
 ```
 
-query による検索は下記参照
-
-> https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_searches.html
-
-filter する際は下記
-gte は greater than or equal の略？
+### filter する際は下記
 
 ```bash
-curl -X GET "localhost:9200/restaurants/_search" -H 'Content-Type: application/json' -d'
+curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
 {
   "query": {
     "bool": {
       "must": { "match_all": {} },
       "filter": {
         "range": {
-          "id": {
+          "store_id": {
             "gte": 200,
             "lte": 300
           }
@@ -268,5 +232,18 @@ curl -X GET "localhost:9200/restaurants/_search" -H 'Content-Type: application/j
   }
 }
 '
-
 ```
+
+## kibana の接続先
+
+http://localhost:5601
+
+## 参考：Elasticsearch の資料
+
+- [公式](https://www.elastic.co/guide/jp/index.html)
+- [公式 query](https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_searches.html)
+- [Elasticsearch の curl を使った index の削除](https://qiita.com/fujieee/items/5f3795d8213373b3b450)
+- [SQL と Elasticsearch とのクエリの比較](https://qiita.com/NAO_MK2/items/630f2c4caa0e8a42407c)
+- [Elasticsearch と SQL 対比しながら理解](https://qiita.com/kieaiaarh/items/5ea4e8a188bd9814000d)
+- [速習 Elasticsearch Search query 基本クエリ(match_phrase, multi_match)編](https://qiita.com/doiken_/items/670dd8a8518ebdd0b104)
+- [【Elasticsearch】よく使うコマンド一覧](https://qiita.com/mug-cup/items/ba5dd0a14838e83e69ac)

@@ -14,4 +14,7 @@ ldbulk.py
 load_csv.py
 jsonWrite.py
 test.py
+csv2json.py
 *.csv
+*.pyc
+__pycache__
