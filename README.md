@@ -16,11 +16,12 @@ Elasticsearch へ登録してクエリの検証を実施します。
 - logstash:7.16.2
 - Python:3
 
-# Installation
+# Setup
 
 ### テストデータの取得
 
-[こちら](https://github.com/livedoor/datasets)から「ldgourmet.tar.gz」を取得してください。
+[こちら](https://github.com/livedoor/datasets)から「ldgourmet.tar.gz」を取得してし、
+dataフォルダに格納してください。
 
 ### テストデータの解凍
 
