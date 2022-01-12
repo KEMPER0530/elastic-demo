@@ -20,7 +20,7 @@ Elasticsearch へ登録してクエリの検証を実施します。
 
 ### テストデータの取得
 
-[こちら](https://github.com/livedoor/datasets)から「ldgourmet.tar.gz」を取得してし、
+[こちら](https://github.com/livedoor/datasets)から「ldgourmet.tar.gz」を取得して、
 data フォルダに格納してください。
 
 ### テストデータの解凍
