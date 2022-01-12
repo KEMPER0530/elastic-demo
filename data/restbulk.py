@@ -157,8 +157,7 @@ dtype2int = {
     i: 'int' for i in 'photo_count,special_count,menu_count,fan_count,access_count'.split(',')}
 
 # Elasticsearch(localhostの9200ポートで待機) にバルクロードする
-#endpoint = 'http://localhost:9200'
-endpoint = 'http://172.25.0.2:9200'
+endpoint = 'http://localhost:9200'
 indexname = 'restdatademo'
 es = Elasticsearch(endpoint, timeout=300,
                    max_retries=10, retry_on_timeout=True)
@@ -172,7 +171,12 @@ actions = pd.merge(r, kuchikomi, how='left',
 
 # intに変換
 actions['id'] = actions['id'].astype('int')
-actions['restaurant_id'] = actions['restaurant_id'].fillna(0).astype('int64')
+
+# ドキュメントのIDを指定
+actions['_id'] = actions['id']
+
+# restaurant_idは不要なので削除
+del actions['restaurant_id']
 
 # dict型に変換
 actions = actions.fillna('').astype(dtype2int).to_dict(orient='records')

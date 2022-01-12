@@ -237,10 +237,6 @@
                     "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
-                "restaurant_id": {
-                    "type": "integer",
-                    "dynamic": false
-                },
                 "kuchikomi": {
                     "type": "array",
                     "analyzer": "kuromoji_analyzer",

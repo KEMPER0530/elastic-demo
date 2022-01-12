@@ -21,7 +21,7 @@ Elasticsearch へ登録してクエリの検証を実施します。
 ### テストデータの取得
 
 [こちら](https://github.com/livedoor/datasets)から「ldgourmet.tar.gz」を取得してし、
-dataフォルダに格納してください。
+data フォルダに格納してください。
 
 ### テストデータの解凍
 
@@ -121,8 +121,7 @@ $ python restbulk.py
 | 43  | location          | 位置情報           | array   |    ○     |
 | 44  | stas              | 駅名               | array   |    ○     |
 | 45  | cates             | カテゴリ名         | array   |    ○     |
-| 46  | restaurant_id     | 店舗 ID            | integer |    -     |
-| 47  | kuchikomi         | 口コミ             | text    |    ○     |
+| 46  | kuchikomi         | 口コミ             | text    |    ○     |
 
 # Usage
 
@@ -171,7 +170,7 @@ $ curl -X PUT -H 'Content-Type:application/json' "localhost:9200/restdatademo/_d
 #### GET /restdatademo/\_doc/1?pretty
 
 ```bash
-$ curl "localhost:9200/restdatademo/_doc/Pob1PX4BSuCe35FEr26s?pretty"
+$ curl "localhost:9200/restdatademo/_doc/16885?pretty"
 ```
 
 ### id ランダム生成でデータ突っ込む
@@ -187,7 +186,7 @@ $ curl -X POST -H 'Content-Type:application/json' "localhost:9200/restdatademo/_
 #### POST /restaurants/\_update/1?pretty
 
 ```bash
-$ curl -X POST -H 'Content-Type:application/json' "localhost:9200/restdatademo/_update/Pob1PX4BSuCe35FEr26s?pretty" -d '{"doc": {"name": "鮨与志テスト"}}'
+$ curl -X POST -H 'Content-Type:application/json' "localhost:9200/restdatademo/_update/16885?pretty" -d '{"doc": {"name": "ラーメン三郎"}}'
 ```
 
 ### bulk を使用して複数 ドキュメントを index,データの最後の行は、改行文字\ n で終わる必要がある
@@ -224,7 +223,7 @@ $ curl -X DELETE "localhost:9200/restdatatest2?pretty"
 #### DELETE /restdatademo/\_doc/?pretty
 
 ```bash
-$ curl -X DELETE "localhost:9200/restdatademo/_doc/FYoEP34BSuCe35FERRr_?pretty"
+$ curl -X DELETE "localhost:9200/restdatademo/_doc/16885?pretty"
 ```
 
 ### json による検索 API(default10 件)
