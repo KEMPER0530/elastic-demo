@@ -234,7 +234,7 @@ $ curl -X GET "localhost:9200/restdatademo/_search?pretty" -H 'Content-Type: app
   "query": { "match_all": {} },
   "sort": [
     {
-      "store_id": { "order": "asc" }
+      "id": { "order": "asc" }
     }
   ]
 }
@@ -244,13 +244,13 @@ $ curl -X GET "localhost:9200/restdatademo/_search?pretty" -H 'Content-Type: app
 ### 検索数とどこから検索かを指定
 
 ```bash
-curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
+$ curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
 {
   "query": { "match_all": {} },
   "from": 10,
   "size": 10,
   "sort": [
-    { "store_id": "asc" }
+    { "id": "asc" }
   ]
 }
 '
@@ -260,7 +260,7 @@ curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/
 ### 返却する JSON のフィールドを選択
 
 ```bash
-curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
+$ curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
 {
   "query": { "match_all": {} },
   "_source": ["store_id", "name"]
@@ -271,7 +271,7 @@ curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/
 ### filter する際は下記
 
 ```bash
-curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
+$ curl -X GET "localhost:9200/restdatademo/_search" -H 'Content-Type: application/json' -d'
 {
   "query": {
     "bool": {
