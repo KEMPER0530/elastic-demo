@@ -5,6 +5,13 @@ from collections import ChainMap
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 
+"""
+livedoor グルメのDataSet のCSVをElasticsearchでの全文検索を意識して結合
+JSONデータ化してバルクロード実行するサンプルスクリプト
+livedoor グルメ DataSet
+http://blog.livedoor.jp/techblog/archives/65836960.html
+"""
+
 # ファイルをDataFrameに読み込む
 files = 'areas.csv,categories.csv,prefs.csv,rating_votes.csv,ratings.csv,restaurants.csv,stations.csv'.split(
     ',')
@@ -18,7 +25,6 @@ r = d['restaurants'].copy()
 var_lst = ['id', 'pref_id', 'area_id', 'station_id1', 'station_time1', 'station_distance1', 'station_id2', 'station_time2', 'station_distance2', 'station_id3', 'station_time3', 'station_distance3', 'category_id1',
            'category_id2', 'category_id3', 'category_id4', 'category_id5', 'open_morning', 'open_lunch', 'open_late', 'photo_count', 'special_count', 'menu_count', 'fan_count', 'access_count', 'closed']
 
-r['store_id'] = r['id'].astype('int')
 r['open_morning'] = r['open_morning'].astype('int')
 r['open_lunch'] = r['open_lunch'].astype('int')
 r['open_late'] = r['open_late'].astype('int')
@@ -66,6 +72,8 @@ def dms2deg(_lat, _lon):
 
 r['location'] = r.apply(lambda s: dms2deg(
     s['north_latitude'], s['east_longitude']), axis=1)
+
+# ちょっと寄り道して、関数定義
 
 
 def myflatten(l):
@@ -149,7 +157,8 @@ dtype2int = {
     i: 'int' for i in 'photo_count,special_count,menu_count,fan_count,access_count'.split(',')}
 
 # Elasticsearch(localhostの9200ポートで待機) にバルクロードする
-endpoint = 'http://localhost:9200'
+#endpoint = 'http://localhost:9200'
+endpoint = 'http://172.25.0.2:9200'
 indexname = 'restdatademo'
 es = Elasticsearch(endpoint, timeout=300,
                    max_retries=10, retry_on_timeout=True)
@@ -157,8 +166,17 @@ es = Elasticsearch(endpoint, timeout=300,
 r['_index'] = indexname
 r['_type'] = '_doc'
 
-actions = pd.merge(r, kuchikomi, how='left', left_on='id', right_on='restaurant_id').fillna(
-    '').astype(dtype2int).to_dict(orient='records')
+# マージ
+actions = pd.merge(r, kuchikomi, how='left',
+                   left_on='id', right_on='restaurant_id')
+
+# intに変換
+actions['id'] = actions['id'].astype('int')
+actions['restaurant_id'] = actions['restaurant_id'].fillna(0).astype('int64')
+
+# dict型に変換
+actions = actions.fillna('').astype(dtype2int).to_dict(orient='records')
 # 補足： クチコミ情報はここで結合（他はルックアップ型だが、pandas.mergeでDataFrameを結合)
 
+# データ投入
 bulk(client=es, actions=actions, chunk_size=100)

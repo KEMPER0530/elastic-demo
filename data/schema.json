@@ -49,31 +49,28 @@
         "restdatademo": {
             "dynamic": "strict",
             "properties": {
-                "store_id": {
-                    "type": "integer",
-                    "dynamic": false
-                },
                 "id": {
                     "type": "integer",
                     "dynamic": false
                 },
                 "name": {
                     "type": "text",
+                    "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
                 "property": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
+                    "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
                 "alphabet": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
+                    "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
                 "name_kana": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
+                    "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
                 "pref_id": {
@@ -142,7 +139,6 @@
                 },
                 "zip": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
                     "dynamic": true
                 },
                 "address": {
@@ -151,13 +147,11 @@
                     "dynamic": true
                 },
                 "north_latitude": {
-                    "type": "text",
-                    "analyzer": "ngram_analyzer",
+                    "type": "float",
                     "dynamic": true
                 },
                 "east_longitude": {
-                    "type": "text",
-                    "analyzer": "ngram_analyzer",
+                    "type": "float",
                     "dynamic": true
                 },
                 "description": {
@@ -167,7 +161,7 @@
                 },
                 "purpose": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
+                    "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
                 "open_morning": {
@@ -204,12 +198,10 @@
                 },
                 "created_on": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
                     "dynamic": true
                 },
                 "modified_on": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
                     "dynamic": true
                 },
                 "closed": {
@@ -223,12 +215,11 @@
                 },
                 "pref_name": {
                     "type": "text",
-                    "analyzer": "ngram_analyzer",
+                    "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
                 "pref": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
                     "dynamic": true
                 },
                 "location": {

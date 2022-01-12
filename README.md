@@ -4,8 +4,9 @@ Elasticsearch on docker.
 
 # Features
 
-Elasticsearch のクエリ練習用の機能です。
-[ライブドアグルメデータ](http://blog.livedoor.jp/techblog/archives/65836960.html)を編集し、Elasticsearch へ登録してクエリの検証を実施します。
+Elasticsearch を利用したレストラン検索を実施する練習用のリポジトリです。
+[ライブドアグルメデータ](https://github.com/livedoor/datasets)を編集し、
+Elasticsearch へ登録してクエリの検証を実施します。
 
 # Requirement
 
@@ -16,6 +17,10 @@ Elasticsearch のクエリ練習用の機能です。
 - Python:3
 
 # Installation
+
+### テストデータの取得
+
+[こちら](https://github.com/livedoor/datasets)から「ldgourmet.tar.gz」を取得してください。
 
 ### テストデータの解凍
 
@@ -66,6 +71,57 @@ $ curl -H "Content-Type: application/json" -XPOST 'http://localhost:9200/restdat
 ```bash
 $ python restbulk.py
 ```
+
+# Data Content
+
+| No  | 物理名            | 論理名             | 型      | kuromoji |
+| :-- | :---------------- | :----------------- | :------ | :------: |
+| 1   | id                | 店舗 ID            | integer |    -     |
+| 2   | name              | 店舗名             | text    |    ○     |
+| 3   | property          | 支店名             | text    |    ○     |
+| 4   | alphabet          | 店名欧文           | text    |    ○     |
+| 5   | name_kana         | 店名ひらがな       | text    |    ○     |
+| 6   | pref_id           | 都道府県 ID        | integer |    -     |
+| 7   | area_id           | エリア ID          | integer |    -     |
+| 8   | station_id1       | 最寄り駅 ID_1      | integer |    -     |
+| 9   | station_time1     | 時間(分)\_1        | integer |    -     |
+| 10  | station_distance1 | 距離(m)\_1         | integer |    -     |
+| 11  | station_id2       | 最寄り駅 ID_2      | integer |    -     |
+| 12  | station_time2     | 時間(分)\_2        | integer |    -     |
+| 13  | station_distance2 | 距離(m)\_2         | integer |    -     |
+| 14  | station_id3       | 最寄り駅 ID_3      | integer |    -     |
+| 15  | station_time3     | 時間(分)\_3        | integer |    -     |
+| 16  | station_distance3 | 距離(m)\_3         | integer |    -     |
+| 17  | category_id1      | カテゴリ ID_1      | integer |    -     |
+| 18  | category_id2      | カテゴリ ID_2      | integer |    -     |
+| 19  | category_id3      | カテゴリ ID_3      | integer |    -     |
+| 20  | category_id4      | カテゴリ ID_4      | integer |    -     |
+| 21  | category_id5      | カテゴリ ID_5      | integer |    -     |
+| 22  | zip               | 郵便番号           | text    |    -     |
+| 23  | address           | 住所               | text    |    ○     |
+| 24  | north_latitude    | 北緯               | float   |    -     |
+| 25  | east_longitude    | 東経               | float   |    -     |
+| 27  | description       | 備考               | text    |    ○     |
+| 28  | purpose           | お店利用目的       | text    |    ○     |
+| 29  | open_morning      | モーニング有無     | integer |    -     |
+| 30  | open_lunch        | ランチ有無         | integer |    -     |
+| 31  | open_late         | 23 時以降営業有無  | integer |    -     |
+| 32  | photo_count       | 写真アップロード数 | integer |    -     |
+| 33  | special_count     | 特集掲載数         | integer |    -     |
+| 34  | menu_count        | メニュー投稿数     | integer |    -     |
+| 35  | fan_count         | ファン数           | integer |    -     |
+| 36  | access_count      | 類型アクセス数     | integer |    -     |
+| 37  | created_on        | 作成日             | text    |    -     |
+| 38  | modified_on       | 更新日             | text    |    -     |
+| 39  | closed            | 閉店               | integer |    -     |
+| 40  | area_name         | エリア名           | text    |    ○     |
+| 41  | pref_name         | 都道府県名         | text    |    ○     |
+| 42  | pref              | 都道府県 ID        | text    |    ○     |
+| 43  | location          | 位置情報           | array   |    ○     |
+| 44  | stas              | 駅名               | array   |    ○     |
+| 45  | cates             | カテゴリ名         | array   |    ○     |
+| 46  | restaurant_id     | 店舗 ID            | integer |    -     |
+| 47  | kuchikomi         | 口コミ             | text    |    ○     |
 
 # Usage
 
@@ -147,7 +203,7 @@ $ curl -X POST "localhost:9200/restdatatest2/_doc/_bulk?pretty" -H 'Content-Type
 ```
 
 ```bash
-$ curl -X POST "localhost:9200/restaurants/_doc/_bulk?pretty" -H 'Content-Type: application/json' -d'
+$ curl -X POST "localhost:9200/restdatatest2/_doc/_bulk?pretty" -H 'Content-Type: application/json' -d'
 {"update":{"_id":"1"}}
 {"doc": { "name": "TEST STORE3" } }
 {"delete":{"_id":"2"}}

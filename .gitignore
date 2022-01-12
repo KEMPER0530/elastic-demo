@@ -17,4 +17,5 @@ test.py
 csv2json.py
 *.csv
 *.pyc
+*.gz
 __pycache__
