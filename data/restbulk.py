@@ -22,20 +22,10 @@ d = {i: pd.read_csv(j, dtype='str').fillna('')
 r = d['restaurants'].copy()
 
 # 型変換
-var_lst = ['id', 'pref_id', 'area_id', 'station_id1', 'station_time1', 'station_distance1', 'station_id2', 'station_time2', 'station_distance2', 'station_id3', 'station_time3', 'station_distance3', 'category_id1',
-           'category_id2', 'category_id3', 'category_id4', 'category_id5', 'open_morning', 'open_lunch', 'open_late', 'photo_count', 'special_count', 'menu_count', 'fan_count', 'access_count', 'closed']
+var_lst = ['open_morning', 'open_lunch', 'open_late', 'photo_count',
+           'special_count', 'menu_count', 'fan_count', 'access_count', 'closed']
 
-r['open_morning'] = r['open_morning'].astype('int')
-r['open_lunch'] = r['open_lunch'].astype('int')
-r['open_late'] = r['open_late'].astype('int')
-r['photo_count'] = r['photo_count'].astype('int')
-r['special_count'] = r['special_count'].astype('int')
-r['menu_count'] = r['menu_count'].astype('int')
-r['fan_count'] = r['fan_count'].astype('int')
-r['access_count'] = r['access_count'].astype('int')
-r['closed'] = r['closed'].astype('int')
-
-# r[var_lst] = r[var_lst].astype('int')
+r[var_lst] = r[var_lst].astype('int')
 
 # エリア名の情報を結合する
 area = d['areas'].set_index('id').to_dict()['name']
@@ -72,8 +62,6 @@ def dms2deg(_lat, _lon):
 
 r['location'] = r.apply(lambda s: dms2deg(
     s['north_latitude'], s['east_longitude']), axis=1)
-
-# ちょっと寄り道して、関数定義
 
 
 def myflatten(l):
@@ -133,8 +121,8 @@ cate = {i[0]: i[1]
                        s['similar'], s['similar_1p'], s['similar_2p']]],
             axis=1).to_list()
         }
-cate['0'] = ['']  # 手抜き
-cate[''] = ['']  # 手抜き
+cate['0'] = ['']
+cate[''] = ['']
 
 catIdCols = 'category_id1,category_id2,category_id3,category_id4,category_id5'.split(
     ',')
@@ -178,8 +166,10 @@ actions['_id'] = actions['id']
 # restaurant_idは不要なので削除
 del actions['restaurant_id']
 
+actions = actions.fillna('').astype(dtype2int)
+
 # dict型に変換
-actions = actions.fillna('').astype(dtype2int).to_dict(orient='records')
+actions = actions.to_dict(orient='records')
 # 補足： クチコミ情報はここで結合（他はルックアップ型だが、pandas.mergeでDataFrameを結合)
 
 # データ投入

@@ -75,53 +75,53 @@ $ python restbulk.py
 
 # Data Content
 
-| No  | 物理名            | 論理名             | 型      | kuromoji |
-| :-- | :---------------- | :----------------- | :------ | :------: |
-| 1   | id                | 店舗 ID            | integer |    -     |
-| 2   | name              | 店舗名             | text    |    ○     |
-| 3   | property          | 支店名             | text    |    ○     |
-| 4   | alphabet          | 店名欧文           | text    |    ○     |
-| 5   | name_kana         | 店名ひらがな       | text    |    ○     |
-| 6   | pref_id           | 都道府県 ID        | integer |    -     |
-| 7   | area_id           | エリア ID          | integer |    -     |
-| 8   | station_id1       | 最寄り駅 ID_1      | integer |    -     |
-| 9   | station_time1     | 時間(分)\_1        | integer |    -     |
-| 10  | station_distance1 | 距離(m)\_1         | integer |    -     |
-| 11  | station_id2       | 最寄り駅 ID_2      | integer |    -     |
-| 12  | station_time2     | 時間(分)\_2        | integer |    -     |
-| 13  | station_distance2 | 距離(m)\_2         | integer |    -     |
-| 14  | station_id3       | 最寄り駅 ID_3      | integer |    -     |
-| 15  | station_time3     | 時間(分)\_3        | integer |    -     |
-| 16  | station_distance3 | 距離(m)\_3         | integer |    -     |
-| 17  | category_id1      | カテゴリ ID_1      | integer |    -     |
-| 18  | category_id2      | カテゴリ ID_2      | integer |    -     |
-| 19  | category_id3      | カテゴリ ID_3      | integer |    -     |
-| 20  | category_id4      | カテゴリ ID_4      | integer |    -     |
-| 21  | category_id5      | カテゴリ ID_5      | integer |    -     |
-| 22  | zip               | 郵便番号           | text    |    -     |
-| 23  | address           | 住所               | text    |    ○     |
-| 24  | north_latitude    | 北緯               | float   |    -     |
-| 25  | east_longitude    | 東経               | float   |    -     |
-| 27  | description       | 備考               | text    |    ○     |
-| 28  | purpose           | お店利用目的       | text    |    ○     |
-| 29  | open_morning      | モーニング有無     | integer |    -     |
-| 30  | open_lunch        | ランチ有無         | integer |    -     |
-| 31  | open_late         | 23 時以降営業有無  | integer |    -     |
-| 32  | photo_count       | 写真アップロード数 | integer |    -     |
-| 33  | special_count     | 特集掲載数         | integer |    -     |
-| 34  | menu_count        | メニュー投稿数     | integer |    -     |
-| 35  | fan_count         | ファン数           | integer |    -     |
-| 36  | access_count      | 類型アクセス数     | integer |    -     |
-| 37  | created_on        | 作成日             | text    |    -     |
-| 38  | modified_on       | 更新日             | text    |    -     |
-| 39  | closed            | 閉店               | integer |    -     |
-| 40  | area_name         | エリア名           | text    |    ○     |
-| 41  | pref_name         | 都道府県名         | text    |    ○     |
-| 42  | pref              | 都道府県 ID        | text    |    ○     |
-| 43  | location          | 位置情報           | array   |    ○     |
-| 44  | stas              | 駅名               | array   |    ○     |
-| 45  | cates             | カテゴリ名         | array   |    ○     |
-| 46  | kuchikomi         | 口コミ             | text    |    ○     |
+| No  | 物理名            | 論理名             | 型        | kuromoji |
+| :-- | :---------------- | :----------------- | :-------- | :------: |
+| 1   | id                | 店舗 ID            | integer   |    -     |
+| 2   | name              | 店舗名             | text      |    ○     |
+| 3   | property          | 支店名             | text      |    ○     |
+| 4   | alphabet          | 店名欧文           | text      |    ○     |
+| 5   | name_kana         | 店名ひらがな       | text      |    ○     |
+| 6   | pref_id           | 都道府県 ID        | keyword   |    -     |
+| 7   | area_id           | エリア ID          | keyword   |    -     |
+| 8   | station_id1       | 最寄り駅 ID_1      | keyword   |    -     |
+| 9   | station_time1     | 時間(分)\_1        | keyword   |    -     |
+| 10  | station_distance1 | 距離(m)\_1         | keyword   |    -     |
+| 11  | station_id2       | 最寄り駅 ID_2      | keyword   |    -     |
+| 12  | station_time2     | 時間(分)\_2        | keyword   |    -     |
+| 13  | station_distance2 | 距離(m)\_2         | keyword   |    -     |
+| 14  | station_id3       | 最寄り駅 ID_3      | keyword   |    -     |
+| 15  | station_time3     | 時間(分)\_3        | keyword   |    -     |
+| 16  | station_distance3 | 距離(m)\_3         | keyword   |    -     |
+| 17  | category_id1      | カテゴリ ID_1      | keyword   |    -     |
+| 18  | category_id2      | カテゴリ ID_2      | keyword   |    -     |
+| 19  | category_id3      | カテゴリ ID_3      | keyword   |    -     |
+| 20  | category_id4      | カテゴリ ID_4      | keyword   |    -     |
+| 21  | category_id5      | カテゴリ ID_5      | keyword   |    -     |
+| 22  | zip               | 郵便番号           | keyword   |    -     |
+| 23  | address           | 住所               | text      |    ○     |
+| 24  | north_latitude    | 北緯               | float     |    -     |
+| 25  | east_longitude    | 東経               | float     |    -     |
+| 27  | description       | 備考               | text      |    ○     |
+| 28  | purpose           | お店利用目的       | text      |    ○     |
+| 29  | open_morning      | モーニング有無     | integer   |    -     |
+| 30  | open_lunch        | ランチ有無         | integer   |    -     |
+| 31  | open_late         | 23 時以降営業有無  | integer   |    -     |
+| 32  | photo_count       | 写真アップロード数 | integer   |    -     |
+| 33  | special_count     | 特集掲載数         | integer   |    -     |
+| 34  | menu_count        | メニュー投稿数     | integer   |    -     |
+| 35  | fan_count         | ファン数           | integer   |    -     |
+| 36  | access_count      | 類型アクセス数     | integer   |    -     |
+| 37  | created_on        | 作成日             | date      |    -     |
+| 38  | modified_on       | 更新日             | date      |    -     |
+| 39  | closed            | 閉店               | integer   |    -     |
+| 40  | area_name         | エリア名           | text      |    ○     |
+| 41  | pref_name         | 都道府県名         | text      |    ○     |
+| 42  | pref              | 都道府県 ID        | keyword   |          |
+| 43  | location          | 位置情報           | geo_point |          |
+| 44  | stas              | 駅名               | text      |    ○     |
+| 45  | cates             | カテゴリ名         | text      |    ○     |
+| 46  | kuchikomi         | 口コミ             | text      |    ○     |
 
 # Usage
 

@@ -47,200 +47,154 @@
     },
     "mappings": {
         "restdatademo": {
-            "dynamic": "strict",
             "properties": {
                 "id": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "name": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "property": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "alphabet": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "name_kana": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "pref_id": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "area_id": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_id1": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_time1": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_distance1": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_id2": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_time2": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_distance2": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_id3": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_time3": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "station_distance3": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "category_id1": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "category_id2": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "category_id3": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "category_id4": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "category_id5": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "keyword"
                 },
                 "zip": {
-                    "type": "text",
-                    "dynamic": true
+                    "type": "keyword"
                 },
                 "address": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "north_latitude": {
-                    "type": "float",
-                    "dynamic": true
+                    "type": "float"
                 },
                 "east_longitude": {
-                    "type": "float",
-                    "dynamic": true
+                    "type": "float"
                 },
                 "description": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "purpose": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "open_morning": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "open_lunch": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "open_late": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "photo_count": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "special_count": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "menu_count": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "fan_count": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "access_count": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "created_on": {
-                    "type": "text",
-                    "dynamic": true
+                    "type": "date"
                 },
                 "modified_on": {
-                    "type": "text",
-                    "dynamic": true
+                    "type": "date"
                 },
                 "closed": {
-                    "type": "integer",
-                    "dynamic": false
+                    "type": "integer"
                 },
                 "area_name": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "pref_name": {
                     "type": "text",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "pref": {
-                    "type": "text",
-                    "dynamic": true
+                    "type": "text"
                 },
                 "location": {
                     "type": "array",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "stas": {
                     "type": "array",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "cates": {
                     "type": "array",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 },
                 "kuchikomi": {
                     "type": "array",
-                    "analyzer": "kuromoji_analyzer",
-                    "dynamic": true
+                    "analyzer": "kuromoji_analyzer"
                 }
             }
         }
